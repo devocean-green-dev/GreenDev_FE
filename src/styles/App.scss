@@ -1,0 +1,13 @@
+@import "_font";
+
+.App {
+  //   width: 100%;
+  max-width: 375px; /* 아이폰 X, XS, 11 Pro와 유사한 너비 */
+  margin: 0 auto;
+  padding-bottom: 50px;
+  @include font-face("GMarketSans", "../assets/fonts/GmarketSansTTFMedium.ttf");
+}
+
+body {
+  font-family: "GMarketSans", sans-serif;
+}
