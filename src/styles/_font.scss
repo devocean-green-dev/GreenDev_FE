@@ -1,0 +1,6 @@
+@mixin font-face($font-family, $font-file-path) {
+  @font-face {
+    font-family: "#{$font-family}";
+    src: url("#{$font-file-path}") format("truetype");
+  }
+}

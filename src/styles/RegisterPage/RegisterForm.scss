@@ -1,0 +1,105 @@
+@import "../_font";
+@include font-face(
+  "GMarketSansLight",
+  "../assets/fonts/GmarketSansTTFLight.ttf"
+);
+
+.campaign-register {
+  form {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    font-family: "GMarketSansLight", sans-serif;
+
+    button {
+      outline: none;
+      border: none;
+      width: 4rem;
+      height: 2rem;
+      border-radius: 15px;
+      background-color: #5db075;
+      color: white;
+      font-family: "GMarketSansLight", sans-serif;
+      align-self: flex-end;
+    }
+
+    input[type="text"],
+    input[type="date"] {
+      width: 100%;
+      height: 2.5rem;
+      border: none;
+      outline: none;
+      border-radius: 1.25rem;
+      background: rgba(62, 147, 94, 0.1);
+      box-sizing: border-box;
+      padding: 0 1.5rem;
+      font-family: "GMarketSansLight", sans-serif;
+
+      &::placeholder {
+        color: #706c6c;
+        font-family: "GMarketSansLight", sans-serif;
+      }
+    }
+
+    .filebox {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      height: 2.5rem;
+      border-radius: 1.25rem;
+      background: rgba(62, 147, 94, 0.1);
+
+      input {
+        // display: inline-block;
+        height: 2.5rem;
+        padding: 0 1.5rem;
+        border: none;
+        outline: none;
+        background: none;
+      }
+
+      label {
+        // display: inline-block;
+        width: 25%;
+        height: 2.5rem;
+        border-radius: 1.25rem;
+        height: 2.5rem;
+        background: #5db075;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.8rem;
+      }
+
+      input[type="file"] {
+        position: absolute;
+        width: 0;
+        height: 0;
+        padding: 0;
+        overflow: hidden;
+        border: 0;
+      }
+    }
+
+    textarea {
+      border: none;
+      outline: none;
+      resize: none;
+      background: none;
+      width: 100%;
+      height: 50vh;
+      border-radius: 1.25rem;
+      background: rgba(62, 147, 94, 0.1);
+      box-sizing: border-box;
+      padding: 1rem 1.5rem;
+      font-family: "GMarketSansLight", sans-serif;
+
+      &::placeholder {
+        color: #706c6c;
+        font-family: "GMarketSansLight", sans-serif;
+      }
+    }
+  }
+}
