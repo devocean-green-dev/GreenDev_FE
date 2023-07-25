@@ -1,24 +1,12 @@
 // 돋보기 메뉴(검색) 페이지 - 검색창 및 최신 캠페인 보여주기
 import Header from "../../components/Header";
 import "../../styles/SearchPage/SearchApp.scss";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { CampaignContext } from "../../components/CampaignContext";
+import { HeaderContainer } from "../../components/HeaderContainer";
 
 const SearchApp = () => {
-  const HeaderContainer = styled.div`
-    width: 100%;
-    max-width: 375px;
-    height: 3rem;
-    background: white;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-  `;
-
   const { campaigns } = useContext(CampaignContext);
   const navigate = useNavigate();
   const goDetailCampaign = (campaignId) => {
