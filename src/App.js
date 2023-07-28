@@ -8,6 +8,7 @@ import RegisterApp from "./pages/RegisterPage/RegisterApp";
 import SearchApp from "./pages/SearchPage/SearchApp";
 import CampaignDetail from "./pages/SearchPage/CampaignDetail";
 import CampaignAuthList from "./pages/SearchPage/CampaignAuthList";
+import CampaignAuthPost from "./pages/SearchPage/CampaignAuthPost";
 import ProfileApp from "./pages/ProfilePage/ProfileApp";
 
 function App() {
@@ -32,6 +33,10 @@ function App() {
                 <CampaignAuthList />
               </CommentContextProvider>
             }
+          />
+          <Route
+            path="/campaigns/:campaignId/participations/post"
+            element={<CampaignAuthPost />}
           />
           <Route path="/profile" element={<ProfileApp />} />
         </Route>
