@@ -4,10 +4,11 @@ import { useState } from "react";
 import styled from "styled-components";
 import "../styles/Navbar/Navbar.scss";
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
 const NavBar = () => {
-  const StyledLink = styled(Link)`
-    text-decoration: none;
-  `;
   const [selectedMenu, setSelectedMenu] = useState("home");
   const handleMenuClick = (iconName) => {
     setSelectedMenu(iconName);
