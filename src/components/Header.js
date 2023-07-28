@@ -1,18 +1,19 @@
 // 페이지 상단 제목을 보여주기 위한 header 컴포넌트
 import styled from "styled-components";
 
-const Header = ({ menuTitle }) => {
-  const HeaderDiv = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding-left: 1rem;
-  `;
+const HeaderDiv = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-left: 1rem;
+`;
 
-  const Title = styled.h1`
-    margin: 0;
-    font-size: 1.5rem;
-  `;
+const Title = styled.h1`
+  margin: 0;
+  font-size: 1.5rem;
+`;
+
+const Header = ({ menuTitle }) => {
   return (
     <HeaderDiv>
       <div>
