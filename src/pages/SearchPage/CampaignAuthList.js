@@ -71,7 +71,10 @@ const CampaignAuthList = () => {
   return (
     <div>
       <HeaderContainer>
-        <Header menuTitle={campaign.title} />
+        <Header
+          icon={process.env.PUBLIC_URL + "/icon/btnBack.svg"}
+          menuTitle={campaign.title}
+        />
       </HeaderContainer>
       <div className="participation-number">
         <p>
