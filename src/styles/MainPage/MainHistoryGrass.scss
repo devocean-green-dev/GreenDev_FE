@@ -1,0 +1,43 @@
+.main-grass-container {
+  width: 100%;
+  max-width: 325px;
+  padding: 20px;
+
+  h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .main-grass-items {
+    width: 330px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .grass-block {
+      width: 28px;
+      height: 28px;
+      margin: 2px;
+      border-radius: 4px;
+    }
+
+    .zero {
+      background-color: #e1e4e8;
+    }
+
+    .one {
+      background-color: #9be9a8;
+    }
+
+    .two {
+      background-color: #40c463;
+    }
+
+    .three {
+      background-color: #30a14e;
+    }
+
+    .more {
+      background-color: #216e39;
+    }
+  }
+}
