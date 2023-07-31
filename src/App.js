@@ -22,7 +22,14 @@ function App() {
             </CampaignProvider>
           }
         >
-          <Route path="/" element={<MainApp />} />
+          <Route
+            path="/"
+            element={
+              <CommentContextProvider>
+                <MainApp />
+              </CommentContextProvider>
+            }
+          />
           <Route path="/register" element={<RegisterApp />} />
           <Route path="/search" element={<SearchApp />} />
           <Route path="/campaigns/:campaignId" element={<CampaignDetail />} />
