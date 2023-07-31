@@ -1,0 +1,43 @@
+.main-campaign-container {
+  width: 100%;
+  max-width: 325px;
+  padding: 20px 0 20px 20px;
+
+  h1 {
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+
+  .main-campaign-list {
+    overflow-x: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .main-campaign-item {
+      display: inline-block;
+      margin: 10px 10px 10px 0;
+      padding: 10px;
+      width: 148px;
+      height: 173px;
+      border-radius: 10px;
+      background: rgba(62, 147, 94, 0.18);
+
+      img {
+        width: 140px;
+        height: 133px;
+        border-radius: 5px;
+      }
+
+      h2 {
+        color: #07683a;
+        font-size: 15px;
+        text-align: center;
+      }
+    }
+  }
+}

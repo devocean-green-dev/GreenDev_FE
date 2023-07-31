@@ -27,7 +27,10 @@ const CampaignAuthPost = () => {
   return (
     <div>
       <HeaderContainer>
-        <Header menuTitle={"참여 인증글 쓰기"} />
+        <Header
+          icon={process.env.PUBLIC_URL + "/icon/btnBack.svg"}
+          menuTitle={"참여 인증글 쓰기"}
+        />
       </HeaderContainer>
       <CampaignAuthContainer>
         <CampaignSummary
