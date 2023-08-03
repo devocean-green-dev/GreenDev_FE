@@ -1,0 +1,68 @@
+@import "../_font";
+@include font-face(
+  "GMarketSansLight",
+  "../assets/fonts/GmarketSansTTFLight.ttf"
+);
+
+.profile-customize-container {
+  width: 100%;
+  max-width: 325px;
+  padding: 10px 20px 20px 20px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    button {
+      border: none;
+      border-radius: 15px;
+      background: #5db075;
+      color: #ffffff;
+      padding: 8px 25px;
+      font-weight: 700;
+      font-family: "GMarketSansLight", sans-serif;
+      align-self: flex-end;
+      margin-bottom: 10px;
+    }
+
+    .badge-tree {
+      text-align: center;
+      position: relative;
+
+      .tree-image {
+        width: 300px;
+        height: 400px;
+      }
+
+      .badge-image {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+      }
+    }
+
+    .badge-container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 5px;
+      grid-row-gap: 20px;
+      place-items: center;
+      margin-top: 50px;
+      max-height: 250px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  }
+}
