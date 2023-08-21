@@ -24,7 +24,6 @@ const NavBar = () => {
           >
             <img
               src={
-                process.env.PUBLIC_URL +
                 "/icon/" +
                 (selectedMenu === "home"
                   ? "ic_baseline-home.svg"
@@ -43,7 +42,6 @@ const NavBar = () => {
           >
             <img
               src={
-                process.env.PUBLIC_URL +
                 "/icon/" +
                 (selectedMenu === "register"
                   ? "ic_baseline-plant.svg"
@@ -60,7 +58,6 @@ const NavBar = () => {
           >
             <img
               src={
-                process.env.PUBLIC_URL +
                 "/icon/" +
                 (selectedMenu === "search"
                   ? "ic_baseline-search.svg"
@@ -79,7 +76,6 @@ const NavBar = () => {
           >
             <img
               src={
-                process.env.PUBLIC_URL +
                 "/icon/" +
                 (selectedMenu === "profile"
                   ? "ic_baseline-user.svg"
