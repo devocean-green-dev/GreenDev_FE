@@ -18,7 +18,7 @@ const NavBar = () => {
     <div className="navbar">
       <Outlet />
       <div className="navbar-footer">
-        <StyledLink to="/" onClick={() => handleMenuClick("home")}>
+        <StyledLink to="/home" onClick={() => handleMenuClick("home")}>
           <div
             className={`menu-item ${selectedMenu === "home" ? "active" : ""}`}
           >
