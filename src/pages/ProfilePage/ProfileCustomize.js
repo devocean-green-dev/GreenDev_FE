@@ -59,17 +59,11 @@ const ProfileCustomize = () => {
       <form>
         <button>저장</button>
         <div className="badge-tree">
-          <img
-            src={process.env.PUBLIC_URL + "/badge/tree.png"}
-            alt="tree"
-            className="tree-image"
-          />
+          <img src={"/badge/tree.png"} alt="tree" className="tree-image" />
           {badgePositions.map((position) => (
             <img
               key={position.index}
-              src={
-                process.env.PUBLIC_URL + "/badge/" + badgeList[position.index]
-              }
+              src={"/badge/" + badgeList[position.index]}
               alt="badge"
               style={{
                 left: position.x,
@@ -84,7 +78,7 @@ const ProfileCustomize = () => {
           {badgeList.map((badge, index) => (
             <img
               key={index}
-              src={process.env.PUBLIC_URL + "/badge/" + badge}
+              src={"/badge/" + badge}
               alt="badge"
               onClick={() => handleBadgeClick(index)}
             />

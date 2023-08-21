@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
-import { useContext } from "react";
+import { useState, useEffect } from "react";
+import { getCampaignData } from "../../api/campaign";
 import styled from "styled-components";
-import { CampaignContext } from "../../components/CampaignContext";
 import { HeaderContainer } from "../../components/HeaderContainer";
 import Header from "../../components/Header";
 import CampaignSummary from "./CampaignSummary";
@@ -21,23 +21,37 @@ const Title = styled.h1`
 
 const CampaignAuthPost = () => {
   const { campaignId } = useParams();
-  const { campaigns } = useContext(CampaignContext);
-  const campaign = campaigns.find((c) => c.id === parseInt(campaignId));
+  const [campaign, setCampaign] = useState(null);
+  useEffect(() => {
+    async function fetchCampaignData() {
+      try {
+        const response = await getCampaignData();
+        const campaignData = response._embedded.campaigns.find((campaign) =>
+          campaign._links.campaign.href.includes(campaignId)
+        );
+        setCampaign(campaignData);
+      } catch (error) {
+        console.error("Error fetching campaign data:", error);
+      }
+    }
+    fetchCampaignData();
+  }, [campaignId]);
+
+  if (!campaign) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
       <HeaderContainer>
-        <Header
-          icon={process.env.PUBLIC_URL + "/icon/btnBack.svg"}
-          menuTitle={"참여 인증글 쓰기"}
-        />
+        <Header icon={"/icon/btnBack.svg"} menuTitle={"참여 인증글 쓰기"} />
       </HeaderContainer>
       <CampaignAuthContainer>
         <CampaignSummary
-          imageUrl={campaign.imageUrl}
+          imageUrl={campaign.campaignimageUrl}
           date={campaign.date}
           title={campaign.title}
-          company={campaign.company}
+          // company={campaign.company}
           description={campaign.description}
         />
         <Title>참여 인증하기</Title>

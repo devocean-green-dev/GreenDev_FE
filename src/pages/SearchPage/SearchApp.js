@@ -2,15 +2,33 @@
 import Header from "../../components/Header";
 import "../../styles/SearchPage/SearchApp.scss";
 import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
-import { CampaignContext } from "../../components/CampaignContext";
+import { useEffect, useState } from "react";
+import { getCampaignData } from "../../api/campaign";
 import { HeaderContainer } from "../../components/HeaderContainer";
 
 const SearchApp = () => {
-  const { campaigns } = useContext(CampaignContext);
+  const [campaigns, setCampaigns] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await getCampaignData();
+        setCampaigns(response._embedded.campaigns);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
   const navigate = useNavigate();
-  const goDetailCampaign = (campaignId) => {
-    navigate(`/campaigns/${campaignId}`);
+  const extractCampaignId = (campaignUrl) => {
+    const parts = campaignUrl.split("/");
+    return parts[parts.length - 1];
+  };
+
+  const goDetailCampaign = (campaignUrl) => {
+    const campaignId = extractCampaignId(campaignUrl); // URL에서 ID 추출
+    navigate(`/campaigns/${campaignId}`); // ID를 포함한 페이지로 이동
   };
 
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -66,18 +84,18 @@ const SearchApp = () => {
         </div>
         <div className="campaign-list-container">
           <h1>캠페인 목록</h1>
-          {searchedCampaigns.map((campaign) => (
+          {searchedCampaigns.map((campaign, index) => (
             <div
               className="campaign-list"
-              key={campaign.id}
-              onClick={() => goDetailCampaign(campaign.id)}
+              key={index} // campaignId로 변경하기
+              onClick={() => goDetailCampaign(campaign._links.campaign.href)}
             >
               <div>
                 <h2>{campaign.title}</h2>
                 <p>{campaign.company}</p>
                 <span>#{campaign.category}</span>
               </div>
-              <img src={campaign.imageUrl} alt="campaign img" />
+              <img src={campaign.campaignimageUrl} alt="campaign img" />
             </div>
           ))}
         </div>

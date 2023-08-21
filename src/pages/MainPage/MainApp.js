@@ -8,10 +8,7 @@ const MainApp = () => {
   return (
     <div>
       <HeaderContainer>
-        <Header
-          icon={process.env.PUBLIC_URL + "/icon/image3.png"}
-          menuTitle="GREENDEV"
-        />
+        <Header icon={"/icon/image3.png"} menuTitle="GREENDEV" />
       </HeaderContainer>
       <MainCampaignList />
       <MainHistoryGrass />

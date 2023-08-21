@@ -1,18 +1,42 @@
 // 캠페인 인증 페이지
-import { useContext, useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../../styles/SearchPage/CampaignAuthList.scss";
-import { CampaignContext } from "../../components/CampaignContext";
-import { CommentContext } from "../../components/CampaignComment";
+import {
+  getParticipationsData,
+  getPostsData,
+  getCampaignData,
+} from "../../api/campaign";
 import { HeaderContainer } from "../../components/HeaderContainer";
 import Header from "../../components/Header";
 
 const CampaignAuthList = () => {
   const { campaignId } = useParams();
-  const { campaigns } = useContext(CampaignContext);
-  const campaign = campaigns.find((c) => c.id === parseInt(campaignId));
-  const { comments } = useContext(CommentContext);
+  const [campaign, setCampaign] = useState(null);
+  const [participations, setParticipations] = useState(null);
+  const [comments, setComments] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchParticipationsAndPosts() {
+      try {
+        const response = await getCampaignData();
+        const campaignData = response._embedded.campaigns.find((campaign) =>
+          campaign._links.campaign.href.includes(campaignId)
+        );
+        setCampaign(campaignData);
+
+        const participationsResponse = await getParticipationsData(campaignId);
+        setParticipations(participationsResponse._embedded.participations[0]);
+
+        const postsResponse = await getPostsData(campaignId);
+        setComments(postsResponse._embedded.posts);
+      } catch (error) {
+        console.error("Error fetching participations and posts:", error);
+      }
+    }
+    fetchParticipationsAndPosts();
+  }, [campaignId]);
 
   const [visibleComments, setVisibleComments] = useState(10);
   const observerRef = useRef(null);
@@ -58,11 +82,9 @@ const CampaignAuthList = () => {
     };
   }, []);
 
-  if (!campaign || !comments) {
-    return <div>캠페인 불러오는중...</div>;
+  if (!participations || !comments || !campaign) {
+    return <div>Loading...</div>;
   }
-
-  const { joinCount, totalPostsCount, posts } = comments[0];
 
   const handleWritePost = () => {
     navigate(`/campaigns/${campaignId}/participations/post`);
@@ -71,22 +93,19 @@ const CampaignAuthList = () => {
   return (
     <div>
       <HeaderContainer>
-        <Header
-          icon={process.env.PUBLIC_URL + "/icon/btnBack.svg"}
-          menuTitle={campaign.title}
-        />
+        <Header icon={"/icon/btnBack.svg"} menuTitle={campaign.title} />
       </HeaderContainer>
       <div className="participation-number">
         <p>
-          <span>{joinCount}</span>명이 <span>{totalPostsCount}</span>번
+          <span>{participations.joinCount}</span>명이 <span>{}</span>번
           참여했어요.
         </p>
       </div>
       <div className="participation-comments">
-        {posts.slice(0, visibleComments).map((post) => (
-          <div className="participation-comment" key={post.postId}>
+        {comments.slice(0, visibleComments).map((post, index) => (
+          <div className="participation-comment" key={index}>
             <div>
-              <img src={post.profileImageUrl} alt="profileImg" />
+              <img src={post.postImageUrl} alt="profileImg" />
             </div>
             <div className="comment-info">
               <div>
