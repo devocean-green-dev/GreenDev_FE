@@ -10,6 +10,7 @@ import CampaignDetail from "./pages/SearchPage/CampaignDetail";
 import CampaignAuthList from "./pages/SearchPage/CampaignAuthList";
 import CampaignAuthPost from "./pages/SearchPage/CampaignAuthPost";
 import ProfileApp from "./pages/ProfilePage/ProfileApp";
+import LoginApp from "./pages/LoginPage/LoginApp";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
           }
         >
           <Route
-            path="/"
+            path="/home"
             element={
               <CommentContextProvider>
                 <MainApp />
@@ -47,6 +48,8 @@ function App() {
           />
           <Route path="/profile" element={<ProfileApp />} />
         </Route>
+        <Route path="/" element={<LoginApp />} />
+        <Route path="/login" element={<LoginApp />} />
       </Routes>
     </div>
   );
