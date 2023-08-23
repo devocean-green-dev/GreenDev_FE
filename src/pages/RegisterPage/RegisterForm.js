@@ -22,7 +22,7 @@ const RegisterForm = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setFormData({ ...formData, file });
+    setFormData({ ...formData, file: file });
   };
 
   const handleSubmit = async (e) => {
@@ -79,7 +79,7 @@ const RegisterForm = () => {
             value={formData.file ? formData.file.name : ""}
             placeholder="사진 첨부"
           />
-          <label for="file">파일찾기</label>
+          <label htmlFor="file">파일찾기</label>
           <input
             type="file"
             name="file"
