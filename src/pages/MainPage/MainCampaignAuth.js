@@ -1,33 +1,57 @@
 // 참여한 캠페인 인증 글들 메인 화면에 보여주는 컴포넌트
-import { useContext } from "react";
-import { CommentContext } from "../../components/CampaignComment";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getMyCampaignPosts } from "../../api/myCampaign";
+import styled from "styled-components";
+
+const Title = styled.h1`
+  font-size: 20px;
+  margin-bottom: 10px;
+  padding: 20px 20px 0 20px;
+`;
 
 const MainCampaignAuth = () => {
-  const { comments } = useContext(CommentContext);
+  const navigate = useNavigate();
+  const userAccessToken = localStorage.getItem("accessToken");
+  const [posts, setPosts] = useState([]);
 
-  if (!comments) {
-    return <div>인증글 불러오는중...</div>;
-  }
-
-  const { posts } = comments[0];
+  useEffect(() => {
+    if (!userAccessToken) {
+      alert("로그인이 필요합니다.");
+      navigate("/");
+      return;
+    }
+    getMyCampaignPosts(userAccessToken)
+      .then((response) => {
+        setPosts(response.data.data.posts);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [navigate, userAccessToken]);
 
   return (
     <div className="main-auth-container">
+      <Title>참여한 캠페인 인증글</Title>
       <div className="participation-comments">
-        {posts.map((post) => (
-          <div className="participation-comment" key={post.postId}>
-            <div>
-              <img src={post.profileImageUrl} alt="profileImg" />
-            </div>
-            <div className="comment-info">
+        {posts.length === 0 ? (
+          <p>참여한 캠페인이 없습니다.</p>
+        ) : (
+          posts.map((post) => (
+            <div className="participation-comment" key={post.postId}>
               <div>
-                <p>{post.nickname}</p>
-                <p>{post.date}</p>
+                <img src={post.postImageUrl} alt="profileImg" />
               </div>
-              <p>{post.content}</p>
+              <div className="comment-info">
+                <div>
+                  <p>{post.nickname}</p>
+                  <p>{post.date}</p>
+                </div>
+                <p>{post.content}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );

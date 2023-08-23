@@ -1,10 +1,26 @@
-import { useNavigate } from "react-router-dom";
+import {
+  getKakaoLoginUrl,
+  getGithubLoginUrl,
+  getGoogleLoginUrl,
+  getNaverLoginUrl,
+} from "../../api/authApi";
 import "../../styles/LoginPage/LoginApp.scss";
 
 const LoginApp = () => {
-  const navigate = useNavigate();
-  const goHome = () => {
-    navigate("/home");
+  const goKakaoLogin = () => {
+    window.location.href = getKakaoLoginUrl();
+  };
+
+  const goGithubLogin = () => {
+    window.location.href = getGithubLoginUrl();
+  };
+
+  const goGoogleLogin = () => {
+    window.location.href = getGoogleLoginUrl();
+  };
+
+  const goNaverLogin = () => {
+    window.location.href = getNaverLoginUrl();
   };
 
   return (
@@ -18,19 +34,19 @@ const LoginApp = () => {
         <img src="/icon/image3.png" alt="logo" />
       </div>
       <div className="login-account">
-        <div className="github-login" onClick={goHome}>
+        <div className="github-login" onClick={goGithubLogin}>
           <img src="/icon/github.svg" alt="github" />
           <p>Login with Github</p>
         </div>
-        <div className="google-login" onClick={goHome}>
+        <div className="google-login" onClick={goGoogleLogin}>
           <img src="/icon/google.svg" alt="google" />
           <p>Login with Google</p>
         </div>
-        <div className="kakao-login" onClick={goHome}>
+        <div className="kakao-login" onClick={goKakaoLogin}>
           <img src="/icon/kakao.svg" alt="kakao" />
           <p>Login with Kakao</p>
         </div>
-        <div className="naver-login" onClick={goHome}>
+        <div className="naver-login" onClick={goNaverLogin}>
           <img src="/icon/naver.png" alt="naver" />
           <p>Login with Naver</p>
         </div>

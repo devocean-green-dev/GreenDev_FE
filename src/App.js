@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { RecoilRoot } from "recoil";
 import "./styles/App.scss";
 import { CampaignProvider } from "./components/CampaignContext";
 import { CommentContextProvider } from "./components/CampaignComment";
@@ -11,46 +12,49 @@ import CampaignAuthList from "./pages/SearchPage/CampaignAuthList";
 import CampaignAuthPost from "./pages/SearchPage/CampaignAuthPost";
 import ProfileApp from "./pages/ProfilePage/ProfileApp";
 import LoginApp from "./pages/LoginPage/LoginApp";
+import OAuthRedirect from "./pages/LoginPage/OAuthRedirect";
 
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route
-          element={
-            <CampaignProvider>
-              <NavBar />
-            </CampaignProvider>
-          }
-        >
+      <RecoilRoot>
+        <Routes>
           <Route
-            path="/home"
             element={
-              <CommentContextProvider>
-                <MainApp />
-              </CommentContextProvider>
+              <CampaignProvider>
+                <NavBar />
+              </CampaignProvider>
             }
-          />
-          <Route path="/register" element={<RegisterApp />} />
-          <Route path="/search" element={<SearchApp />} />
-          <Route path="/campaigns/:campaignId" element={<CampaignDetail />} />
-          <Route
-            path="/campaigns/:campaignId/participations"
-            element={
-              <CommentContextProvider>
-                <CampaignAuthList />
-              </CommentContextProvider>
-            }
-          />
-          <Route
-            path="/campaigns/:campaignId/participations/post"
-            element={<CampaignAuthPost />}
-          />
-          <Route path="/profile" element={<ProfileApp />} />
-        </Route>
-        <Route path="/" element={<LoginApp />} />
-        <Route path="/login" element={<LoginApp />} />
-      </Routes>
+          >
+            <Route
+              path="/home"
+              element={
+                <CommentContextProvider>
+                  <MainApp />
+                </CommentContextProvider>
+              }
+            />
+            <Route path="/register" element={<RegisterApp />} />
+            <Route path="/search" element={<SearchApp />} />
+            <Route path="/campaigns/:campaignId" element={<CampaignDetail />} />
+            <Route
+              path="/campaigns/:campaignId/participations"
+              element={
+                <CommentContextProvider>
+                  <CampaignAuthList />
+                </CommentContextProvider>
+              }
+            />
+            <Route
+              path="/campaigns/:campaignId/participations/post"
+              element={<CampaignAuthPost />}
+            />
+            <Route path="/profile" element={<ProfileApp />} />
+          </Route>
+          <Route path="/" element={<LoginApp />} />
+          <Route path="/oauth2/redirect" element={<OAuthRedirect />} />
+        </Routes>
+      </RecoilRoot>
     </div>
   );
 }
