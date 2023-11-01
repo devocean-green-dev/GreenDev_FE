@@ -24,6 +24,10 @@ const MainCampaignList = () => {
       });
   }, [navigate, userAccessToken]);
 
+  const goCampaignList = () => {
+    navigate("/search");
+  };
+
   const goCampaignAuth = (campaignId) => {
     navigate(`/campaigns/${campaignId}/participations/post`);
   };
@@ -33,7 +37,11 @@ const MainCampaignList = () => {
       <h1>참여중 캠페인</h1>
       <div className="main-campaign-list">
         {campaigns.length === 0 ? (
-          <p>참여중인 캠페인이 없습니다.</p>
+          <div className="participation-none">
+            <img src="icon/image3.png" alt="logo" width={"40"} height={"40"} />
+            <p>참여중인 캠페인이 없습니다.</p>
+            <button onClick={goCampaignList}>캠페인 구경하기</button>
+          </div>
         ) : (
           campaigns.map((campaign) => (
             <div
