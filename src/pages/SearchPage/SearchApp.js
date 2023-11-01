@@ -95,7 +95,7 @@ const SearchApp = () => {
                 <p>{campaign.company}</p>
                 <span>#{campaign.category}</span>
               </div>
-              <img src={campaign.campaignimageUrl} alt="campaign img" />
+              <img src={campaign.campaignImageUrl} alt="campaign img" />
             </div>
           ))}
         </div>
