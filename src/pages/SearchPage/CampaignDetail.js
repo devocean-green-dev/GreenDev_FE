@@ -40,7 +40,7 @@ const CampaignDetail = () => {
         <Header icon={"/icon/btnBack.svg"} menuTitle={campaign.title} />
       </HeaderContainer>
       <div className="campaign-detail-container">
-        <img src={campaign.campaignimageUrl} alt="Campaign" />
+        <img src={campaign.campaignImageUrl} alt="Campaign" />
         <div className="campaign-info">
           <span>#{campaign.category}</span>
           <p>기간: {campaign.date}</p>
