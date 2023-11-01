@@ -35,7 +35,10 @@ const MainCampaignAuth = () => {
       <Title>참여한 캠페인 인증글</Title>
       <div className="participation-comments">
         {posts.length === 0 ? (
-          <p>참여한 캠페인이 없습니다.</p>
+          <div className="participation-none" style={{ marginTop: "-20px" }}>
+            <img src="icon/image3.png" alt="logo" width={"40"} height={"40"} />
+            <p>참여한 캠페인이 없습니다.</p>
+          </div>
         ) : (
           posts.map((post) => (
             <div className="participation-comment" key={post.postId}>
