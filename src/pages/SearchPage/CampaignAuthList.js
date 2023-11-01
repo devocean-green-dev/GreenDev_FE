@@ -97,8 +97,8 @@ const CampaignAuthList = () => {
       </HeaderContainer>
       <div className="participation-number">
         <p>
-          <span>{participations.joinCount}</span>명이 <span>{}</span>번
-          참여했어요.
+          <span>{campaign.joinMemberCount}</span>명이{" "}
+          <span>{campaign.totalJoinCount}</span>번 참여했어요.
         </p>
       </div>
       <div className="participation-comments">
