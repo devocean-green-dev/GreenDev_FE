@@ -48,7 +48,7 @@ const CampaignAuthPost = () => {
       </HeaderContainer>
       <CampaignAuthContainer>
         <CampaignSummary
-          imageUrl={campaign.campaignimageUrl}
+          imageUrl={campaign.campaignImageUrl}
           date={campaign.date}
           title={campaign.title}
           // company={campaign.company}
