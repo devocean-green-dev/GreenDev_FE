@@ -23,7 +23,8 @@
       align-self: flex-end;
     }
 
-    input[type="text"] {
+    input[type="text"],
+    input[type="date"] {
       width: 100%;
       height: 40px;
       border: none;
