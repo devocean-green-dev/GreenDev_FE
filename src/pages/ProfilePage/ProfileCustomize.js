@@ -1,23 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../styles/ProfilePage/ProfileCustomize.scss";
-
-const badgeList = [
-  "eco-friendly-car.png",
-  "electric-blue-car.png",
-  "hanger-bag-yellow.png",
-  "hanger-bag.png",
-  "recycle-bin.png",
-  "reusable-bag.png",
-  "eco-friendly-car.png",
-  "eco-friendly-car.png",
-  "eco-friendly-car.png",
-  "eco-friendly-car.png",
-  "eco-friendly-car.png",
-  "eco-friendly-car.png",
-];
+import { getMyBadge } from "../../api/myCampaign";
+import { useRecoilValue } from "recoil";
+import { accessTokenState } from "../../data/User";
+import ProfileInfo from "./ProfileInfo";
 
 const ProfileCustomize = () => {
+  const navigate = useNavigate();
+  const userAccessToken = useRecoilValue(accessTokenState);
   const [badgePositions, setBadgePositions] = useState([]);
+  const [badgeList, setBadgeList] = useState([]);
+
+  const [showProfileInfo, setShowProfileInfo] = useState(false);
+
+  const toggleProfileInfo = () => {
+    setShowProfileInfo((prevState) => !prevState);
+  };
+
+  useEffect(() => {
+    if (!userAccessToken) {
+      alert("로그인이 필요합니다.");
+      navigate("/");
+      return;
+    }
+    getMyBadge(userAccessToken)
+      .then((response) => {
+        setBadgeList(response.data.data.badges);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [navigate, userAccessToken]);
 
   const generateRandomPosition = () => {
     const treeWidth = 250;
@@ -63,7 +77,7 @@ const ProfileCustomize = () => {
           {badgePositions.map((position) => (
             <img
               key={position.index}
-              src={"/badge/" + badgeList[position.index]}
+              src={badgeList[position.index].badgeImageUrl}
               alt="badge"
               style={{
                 left: position.x,
@@ -74,17 +88,37 @@ const ProfileCustomize = () => {
             />
           ))}
         </div>
-        <div className="badge-container">
-          {badgeList.map((badge, index) => (
-            <img
-              key={index}
-              src={"/badge/" + badge}
-              alt="badge"
-              onClick={() => handleBadgeClick(index)}
-            />
-          ))}
-        </div>
+        {badgeList.length === 0 ? (
+          <div className="participation-none">
+            <img src="icon/image3.png" alt="logo" width={"40"} height={"40"} />
+            <p>획득한 뱃지가 없습니다.</p>
+          </div>
+        ) : (
+          <div className="badge-container">
+            {badgeList.map((badge, index) => (
+              <img
+                key={index}
+                src={badge.badgeImageUrl}
+                alt="badge"
+                onClick={() => handleBadgeClick(index)}
+              />
+            ))}
+          </div>
+        )}
       </form>
+      {showProfileInfo && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={toggleProfileInfo}>
+              X
+            </span>
+            <ProfileInfo />
+          </div>
+        </div>
+      )}
+      <button className="info-button" onClick={toggleProfileInfo}>
+        프로필 정보 보기
+      </button>
     </div>
   );
 };
