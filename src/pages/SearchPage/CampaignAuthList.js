@@ -82,13 +82,26 @@ const CampaignAuthList = () => {
     };
   }, []);
 
-  if (!participations || !comments || !campaign) {
-    return <div>Loading...</div>;
-  }
-
   const handleWritePost = () => {
     navigate(`/campaigns/${campaignId}/participations/post`);
   };
+
+  if (!participations || !comments || !campaign) {
+    return (
+      <div>
+        <HeaderContainer>
+          <Header icon={"/icon/btnBack.svg"} menuTitle="캠페인 인증글" />
+        </HeaderContainer>
+        <div className="participation-none" style={{ marginTop: "30px" }}>
+          <img src="/icon/image3.png" alt="logo" width={"40"} height={"40"} />
+          <p>등록된 캠페인 인증 글이 없습니다.</p>
+        </div>
+        <div className="participation-button">
+          <button onClick={handleWritePost}>참여인증</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
