@@ -26,3 +26,12 @@ export const getMyCampaignPosts = (accessToken) => {
     },
   });
 };
+
+// 프로필에서 뱃지 조회
+export const getMyBadge = (accessToken) => {
+  return axios.get(`${BASE_URL}/profile`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
