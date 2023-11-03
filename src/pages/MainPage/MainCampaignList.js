@@ -2,11 +2,14 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getMyCampaigns } from "../../api/myCampaign";
+import { useRecoilValue } from "recoil";
+import { accessTokenState } from "../../data/User";
 import "../../styles/MainPage/MainCampaignList.scss";
 
 const MainCampaignList = () => {
   const navigate = useNavigate();
-  const userAccessToken = localStorage.getItem("accessToken");
+  const userAccessToken = useRecoilValue(accessTokenState);
+  // const userAccessToken = localStorage.getItem("accessToken");
   const [campaigns, setCampaigns] = useState([]);
 
   useEffect(() => {

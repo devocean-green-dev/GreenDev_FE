@@ -13,7 +13,7 @@ async function fetchData(endpoint, options = {}) {
 }
 
 export async function getCampaignData() {
-  return fetchData("/campaigns");
+  return fetchData("/campaigns?page=0&size=100&sort=joinCount,DESC");
 }
 
 export async function getParticipationsData(campaignId) {

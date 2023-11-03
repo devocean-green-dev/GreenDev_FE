@@ -25,7 +25,7 @@ const OAuthRedirect = () => {
           },
         })
         .then((response) => {
-          setUserInfo(response.data);
+          setUserInfo(response.data.data);
           navigate("/home");
         })
         .catch((error) => {

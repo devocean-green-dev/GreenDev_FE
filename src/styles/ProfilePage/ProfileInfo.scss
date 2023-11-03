@@ -1,0 +1,31 @@
+.profile-info-container {
+  width: 100%;
+  max-width: 325px;
+  // padding: 10px 20px 80px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .profile-info-top {
+    img {
+      border-radius: 50px;
+    }
+
+    p {
+      color: #07683a;
+      font-weight: 700;
+      padding-bottom: 5px;
+      border-bottom: 1.5px solid #cccccc;
+    }
+  }
+
+  .profile-info-bottom {
+    width: 100%;
+    border-radius: 30px;
+    background: #3e935e2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+}

@@ -64,16 +64,13 @@ const RegisterForm = () => {
       );
 
       if (response.status === 200) {
-        // console.log("성공", response.data.data.uploadFileUrl);
         setFormData((prevFormData) => ({
           ...prevFormData,
           campaignImageUrl: response.data.data.uploadFileUrl,
         }));
-      } else {
-        console.log("이미지 업로드 실패", response);
       }
     } catch (error) {
-      console.error("이미지 업로드 에러", error);
+      console.error(error);
     }
   };
 
@@ -82,13 +79,17 @@ const RegisterForm = () => {
     console.log(formData);
 
     try {
-      await axios.post("https://greendev-api.dev-lr.com/campaigns", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-      // console.log("캠페인 등록 데이터 전송 성공!");
+      const response = await axios.post(
+        "https://greendev-api.dev-lr.com/api/v1/campaigns",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("캠페인 등록 데이터 전송 성공!", response);
       alert("캠페인이 등록되었습니다!");
       navigate("/search");
     } catch (error) {
@@ -163,7 +164,11 @@ const RegisterForm = () => {
           <img
             src={formData.campaignImageUrl}
             alt="Preview"
-            style={{ maxWidth: "200px", margin: "0 auto" }} // Set the desired width for the image preview
+            style={{
+              maxWidth: "200px",
+              margin: "0 auto",
+              paddingBottom: "10vh",
+            }}
           />
         )}
       </form>

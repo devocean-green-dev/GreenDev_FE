@@ -32,12 +32,18 @@ const SearchApp = () => {
   };
 
   const [searchKeyword, setSearchKeyword] = useState("");
-  const searchedCampaigns = campaigns.filter(
-    (campaign) =>
-      campaign.title.toLowerCase().includes(searchKeyword.toLowerCase()) ||
-      campaign.company.toLowerCase().includes(searchKeyword.toLowerCase()) ||
-      campaign.category.toLowerCase().includes(searchKeyword.toLowerCase())
-  );
+  const searchedCampaigns = campaigns.filter((campaign) => {
+    const lowerCaseSearchKeyword = searchKeyword
+      ? searchKeyword.toLowerCase()
+      : "";
+
+    return (
+      (campaign.title &&
+        campaign.title.toLowerCase().includes(lowerCaseSearchKeyword)) ||
+      (campaign.category &&
+        campaign.category.toLowerCase().includes(lowerCaseSearchKeyword))
+    );
+  });
 
   return (
     <div>
@@ -92,7 +98,7 @@ const SearchApp = () => {
             >
               <div>
                 <h2>{campaign.title}</h2>
-                <p>{campaign.company}</p>
+                {/* <p>{campaign.company}</p> */}
                 <span>#{campaign.category}</span>
               </div>
               <img src={campaign.campaignImageUrl} alt="campaign img" />
